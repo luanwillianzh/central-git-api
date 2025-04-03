@@ -14,6 +14,7 @@ def get_novel_info(novel):
 
 @app.get("/novel/{novel}/chapter/{chapter}")
 def get_chapter(chapter):
+  try:
     response = requests.get(f"https://raw.githubusercontent.com/luanwillianzh/Novel-Reader-Data/refs/heads/main/{novel}/{chapter}.html", verify=False)
     soup = BeautifulSoup(response.text, 'html.parser')
     title = soup.select_one("h1").text.strip().replace("\n", " ")
@@ -23,6 +24,8 @@ def get_chapter(chapter):
       subtitle = ""
     content = str(soup.select_one("div.epcontent.entry-content"))
     return {"title": title, "subtitle": subtitle, "content": content}
+  except Exception as e:
+    return {"error": e}
 
 @app.get("/search/{text}")
 def search(text):
