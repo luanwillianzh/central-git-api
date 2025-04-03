@@ -13,7 +13,7 @@ def get_novel_info(novel):
     return response
 
 @app.get("/novel/{novel}/chapter/{chapter}")
-def get_chapter(chapter):
+def get_chapter(novel, chapter):
   try:
     response = requests.get(f"https://raw.githubusercontent.com/luanwillianzh/Novel-Reader-Data/refs/heads/main/{novel}/{chapter}.html", verify=False)
     soup = BeautifulSoup(response.text, 'html.parser')
