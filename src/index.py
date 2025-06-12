@@ -31,6 +31,6 @@ def get_chapter(novel, chapter):
 def search(text):
     resp = requests.get("https://raw.githubusercontent.com/luanwillianzh/Novel-Reader-Data/refs/heads/main/info.json").json()
     try:
-      return {"sucesso": True, "resultado": [ {"nome": resp[novel_id]["nome"], "url": novel_id, "cover": resp[novel_id]["cover"]} for novel_id in resp if urllib.parse.unquote_plus(text.lower()) in str(resp[novel_id]).lower() ]}
+      return {"sucesso": True, "resultado": [ {"nome": resp[novel_id]["nome"], "url": novel_id, "cover": resp[novel_id]["cover"], "genres": resp[novel_id]["genres"]} for novel_id in resp if urllib.parse.unquote_plus(text.lower()) in str(resp[novel_id]).lower() ]}
     except:
-      return {"sucesso": True, "resultado": [ {"nome": resp[novel_id]["nome"], "url": novel_id, "cover": resp[novel_id]["cover"]} for novel_id in resp ]}
+      return {"sucesso": True, "resultado": [ {"nome": resp[novel_id]["nome"], "url": novel_id, "cover": resp[novel_id]["cover"], "genres": resp[novel_id]["genres"]} for novel_id in resp ]}
